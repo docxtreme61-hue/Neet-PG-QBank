@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NEET PG Question Bank</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .container {
+      padding: 20px;
+    }
+    select {
+      font-size: 16px;
+      padding: 5px;
+      margin: 10px 0;
+      width: 100%;
+      max-width: 500px;
+      display: block;
+    }
+    #question-section,
+    #grandtest-section {
+      margin-top: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      margin: 8px 0;
+    }
+    label {
+      cursor: pointer;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    .explanation {
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      background: #f1f1f1;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>NEET PG Question Bank</h1>
+
+    <!-- =========================
+         SUBJECT–TOPIC SECTION
+         ========================= -->
+    <h2>Subject-wise Practice</h2>
+
+    <!-- Subject selector -->
+    <label for="subject-select">Select Subject:</label>
+    <select id="subject-select">
+      <option value="">--Choose a Subject--</option>
+      <option value="anatomy">Anatomy</option>
+      <option value="biochemistry">Biochemistry</option>
+      <option value="physiology">Physiology</option>
+      <option value="pharmacology">Pharmacology</option>
+      <option value="microbiology">Microbiology</option>
+      <option value="pathology">Pathology</option>
+      <option value="community_medicine">Community Medicine</option>
+      <option value="forensic_medicine">Forensic Medicine</option>
+      <option value="ophthalmology">Ophthalmology</option>
+      <option value="ent">ENT</option>
+      <option value="dermatology">Dermatology</option>
+      <option value="psychiatry">Psychiatry</option>
+      <option value="radiology">Radiology</option>
+      <option value="medicine">Medicine</option>
+      <option value="surgery">Surgery</option>
+      <option value="orthopaedics">Orthopaedics</option>
+      <option value="paediatrics">Paediatrics</option>
+      <option value="obg">OBG</option>
+    </select>
+
+    <!-- Topic selector -->
+    <label for="topic-select">Select Topic:</label>
+    <select id="topic-select" disabled>
+      <option value="">--Choose a Topic--</option>
+    </select>
+
+    <!-- Subject-wise question area -->
+    <div id="question-section">
+      <!-- Questions for subject-wise mode will appear here -->
+    </div>
+
+    <hr style="margin: 40px 0;">
+
+    <!-- =========================
+         GRAND TEST SECTION
+         ========================= -->
+    <h2>Grand Test 1</h2>
+    <button id="start-grandtest-btn">Start Grand Test 1</button>
+    <div id="grandtest-section">
+      <!-- Grand Test questions will appear here -->
+    </div>
+
+  </div>
+
+<script>
+  /***********************
+   * SUBJECT–TOPIC DATA
+   ***********************/
+  const subjectTopics = {
+    anatomy: [
+      "Embryology",
+      "Histology",
+      "Neuro Anatomy",
+      "Head and Neck",
+      "Upper Limb",
+      "Thorax",
+      "Abdomen and Pelvis",
+      "Lower Limb",
+      "Back",
+      "General Anatomy"
+    ],
+    biochemistry: [
+      "Carbohydrates",
+      "Amino Acids and Proteins",
+      "Lipids",
+      "Enzymes and Porphyrins",
+      "Clinical Biochemistry",
+      "Nutrition and Genetics"
+    ],
+    physiology: [
+      "General Physiology",
+      "Nerve Muscle Physiology",
+      "Central Nervous System",
+      "Respiratory System",
+      "Cardiovascular System",
+      "Gastrointestinal Tract",
+      "Renal Physiology",
+      "Endocrine Physiology",
+      "Reproductive Physiology",
+      "Exercise Physiology"
+    ],
+    pharmacology: [
+      "General Pharmacology",
+      "Autonomic Nervous System",
+      "Cardiovascular System",
+      "Central and Peripheral Nervous System",
+      "Autacoids",
+      "Hematology",
+      "Respiratory System",
+      "Gastrointestinal Drugs",
+      "Antineoplastic Agents"
+    ],
+    microbiology: [
+      "General Microbiology",
+      "Immunology",
+      "Bacteriology",
+      "Virology",
+      "Mycology",
+      "Parasitology",
+      "Applied Microbiology"
+    ],
+    pathology: [
+      "General Pathology",
+      "Hematology",
+      "CVS",
+      "Gastrointestinal System",
+      "Genitourinary System",
+      "Respiratory System",
+      "Endocrine System and Breast",
+      "Skin and Musculoskeletal System",
+      "Nervous System"
+    ],
+    community_medicine: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    forensic_medicine: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    ophthalmology: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    ent: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    dermatology: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    psychiatry: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    radiology: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    medicine: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    surgery: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    orthopaedics: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    paediatrics: ["Placeholder Topic 1", "Placeholder Topic 2"],
+    obg: ["Placeholder Topic 1", "Placeholder Topic 2"]
+  };
+
+  const questionsData = {
+    anatomy: {
+      general_anatomy: [
+        {
+          question: "Which of the following parts of human skeleton forms the helmet for the protection of human head?",
+          options: ["Cranium", "Temporal Bone", "Hyoid", "Mandible"],
+          correctIndex: 0
+        }
+      ]
+    }
+    // You can extend this with more questions for other subjects/topics
+  };
+
+  /***********************
+   * BASIC DOM HOOKS
+   ***********************/
+  const subjectSelect = document.getElementById('subject-select');
+  const topicSelect = document.getElementById('topic-select');
+  const questionSection = document.getElementById('question-section');
+
+  const startGrandBtn = document.getElementById('start-grandtest-btn');
+  const grandSection = document.getElementById('grandtest-section');
+
+  /***********************
+   * SUBJECT–TOPIC LOGIC
+   ***********************/
+  if (subjectSelect && topicSelect && questionSection) {
+    subjectSelect.addEventListener('change', () => {
+      const selectedSubject = subjectSelect.value;
+      topicSelect.innerHTML = '<option value="">--Choose a Topic--</option>';
+      questionSection.innerHTML = '';
+
+      if (selectedSubject && subjectTopics[selectedSubject]) {
+        subjectTopics[selectedSubject].forEach(topic => {
+          const option = document.createElement('option');
+          // convert spaces to underscores e.g. "General Anatomy" -> "general_anatomy"
+          option.value = topic.toLowerCase().replace(/\s+/g, '_');
+          option.textContent = topic;
+          topicSelect.appendChild(option);
+        });
+        topicSelect.disabled = false;
+      } else {
+        topicSelect.disabled = true;
+      }
+    });
+
+    topicSelect.addEventListener('change', () => {
+      questionSection.innerHTML = '';
+      const selectedSubject = subjectSelect.value;
+      const selectedTopic = topicSelect.value;
+
+      if (
+        selectedSubject && selectedTopic &&
+        questionsData[selectedSubject] &&
+        questionsData[selectedSubject][selectedTopic] &&
+        questionsData[selectedSubject][selectedTopic].length > 0
+      ) {
+        const questionObj = questionsData[selectedSubject][selectedTopic][0];
+        renderSingleQuestion(questionSection, questionObj, 'quiz-option');
+      } else {
+        questionSection.textContent = 'No questions added for this topic yet.';
+      }
+    });
+  }
+
+  // Renders a single MCQ with options and basic correct/wrong feedback
+  function renderSingleQuestion(container, questionObj, radioName) {
+    container.innerHTML = '';
+
+    const qText = document.createElement('h2');
+    qText.textContent = questionObj.question;
+    container.appendChild(qText);
+
+    const ul = document.createElement('ul');
+
+    questionObj.options.forEach((optionText, index) => {
+      const li = document.createElement('li');
+
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = radioName;
+      radio.id = `${radioName}-${index}`;
+      radio.value = index;
+
+      const label = document.createElement('label');
+      label.htmlFor = radio.id;
+      label.textContent = optionText;
+      label.style.marginLeft = '8px';
+
+      li.appendChild(radio);
+      li.appendChild(label);
+      ul.appendChild(li);
+    });
+
+    container.appendChild(ul);
+
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = "Submit Answer";
+    container.appendChild(submitBtn);
+
+    const feedback = document.createElement('div');
+    feedback.className = 'feedback';
+    container.appendChild(feedback);
+
+    submitBtn.addEventListener('click', () => {
+      const selectedOption = container.querySelector(`input[name="${radioName}"]:checked`);
+      if (!selectedOption) {
+        alert('Please select an option before submitting.');
+        return;
+      }
+      const selectedIndex = parseInt(selectedOption.value, 10);
+      if (selectedIndex === questionObj.correctIndex) {
+        feedback.textContent = 'Correct!';
+        feedback.style.color = 'green';
+      } else {
+        feedback.textContent = 'Wrong!';
+        feedback.style.color = 'red';
+      }
+    });
+  }
+
+  /***********************
+   * GRAND TEST DATA
+   ***********************/
+  const grandTestQuestions = [
+    {
+      // Question 1
+      question:
+        "The third week of development is characterized by the appearance of the branchial apparatus, the embryonic primordium from which head and neck structures will be derived. Which of the following structures develops from the second pharyngeal arch?",
+      options: [
+        "Anterior digastric muscle",
+        "Posterior cricoarytenoideus muscle",
+        "Posterior digastric muscle",
+        "Stylopharyngeus muscle"
+      ],
+      correctIndex: 2,
+      explanation:
+        "The posterior belly of the digastric is derived from the second branchial (pharyngeal) arch and is supplied by the facial nerve. The anterior belly is from the first arch (mandibular division of trigeminal nerve). Posterior cricoarytenoid and superior constrictor muscles are derived from 4th–6th arches and are supplied by the vagus nerve, while stylopharyngeus is from the third arch and supplied by the glossopharyngeal nerve."
+    },
+    {
+      // Question 2
+      question:
+        "A 31-year-old woman complains of headache and dizziness after hitting a cabinet door with her head. MRI and venogram show a large blood clot in the great cerebral vein of Galen. The obstructed vein of the brain is a direct tributary of which of the following venous structures?",
+      options: [
+        "Emissary veins",
+        "Pterygoid venous plexus",
+        "Diploic veins",
+        "Dural venous sinuses"
+      ],
+      correctIndex: 3,
+      explanation:
+        "Veins of the brain, including the great cerebral vein of Galen, drain directly into the dural venous sinuses. Emissary veins connect dural venous sinuses to scalp veins; the pterygoid venous plexus communicates with the cavernous sinus; diploic veins lie in skull bone and communicate with sinuses and scalp veins."
+    },
+    {
+      // Question 3
+      question:
+        "An elderly patient reports muscle weakness and lethargy. Urine sodium is 600 mmol/L and urine osmolality is 1200 mOsm/L. Plasma sodium is 167 mmol/L, plasma renin activity is 4 ng/mL/h (normal 1), plasma ADH is 60 pg/mL (normal 3), and plasma aldosterone is 15 ng/dL (normal 6). What is the most likely diagnosis for this patient’s hypernatremia?",
+      options: [
+        "Dehydration caused by decreased fluid intake",
+        "Syndrome of inappropriate secretion of ADH (SIADH)",
+        "Primary hyperaldosteronism",
+        "Nephrogenic diabetes insipidus"
+      ],
+      correctIndex: 0,
+      explanation:
+        "The patient has very high plasma sodium, very concentrated urine with high urine sodium, and elevated renin, ADH, and aldosterone. These are appropriate compensatory responses to volume depletion, consistent with dehydration due to decreased intake. SIADH causes hyponatremia and suppression of renin/aldosterone. Primary hyperaldosteronism causes Na+ and water retention with only modest Na+ rise. Nephrogenic diabetes insipidus causes dilute urine, not concentrated as in this case."
+    },
+    {
+      // Question 4 – jaundice
+      question:
+        "A patient presents with yellow discoloration of skin, sclera, and palate. Gall bladder is palpable, liver is enlarged and tender, spleen is normal. Which is the most likely diagnosis?",
+      options: [
+        "Hemolytic jaundice",
+        "Obstructive jaundice",
+        "Viral hepatitis",
+        "Malnutrition"
+      ],
+      correctIndex: 1,
+      explanation:
+        "In obstructive jaundice, conjugated (direct) bilirubin is increased in plasma and excreted in urine, giving a positive Fouchet’s test. Urobilinogen is absent in urine. A palpable gallbladder with jaundice classically points to extrahepatic obstruction, supporting obstructive jaundice."
+    },
+    {
+      // Question 5 – aneurysm / vasa vasorum
+      question:
+        "A 55-year-old hypertensive male presents with persistent cough and breathlessness for 2 months. His BP is 160–180/100 mmHg, and he is non-compliant with antihypertensives and diet. Contrast-enhanced CT shows dilatation of the ascending aorta consistent with an aneurysm. Which of the following is the main pathogenic mechanism in this patient?",
+      options: [
+        "Increased degradation of collagen due to inflammation",
+        "Reduced synthesis of collagen",
+        "Vasospasm of vasa vasorum leading to death of smooth muscles",
+        "All of the above"
+      ],
+      correctIndex: 2,
+      explanation:
+        "Hypertensive aneurysm of the ascending aorta is associated with smooth muscle necrosis due to vasospasm of the vasa vasorum supplying the aortic wall. Inflammatory aneurysms (e.g. vasculitis, atherosclerosis) involve collagen degradation, and inherited disorders like Ehlers–Danlos cause reduced collagen synthesis."
+    },
+    {
+      // Question 6 – anemia + pigmentation
+      question:
+        "A 35-year-old male has presented to the physician for refractory microcytic hypochromic anemia. He has been on oral iron on and off for few years. The patient’s mother had breast carcinoma and similar physical appearance as the patient. General physical examination shows mucocutaneous pigmentation. Stool occult blood is positive. Serum ferritin is 45 mg/L and serum iron is 50 µg/dL. Which of the following is the correct interpretation and management in this patient?",
+      options: [
+        "Pigmentation is due to oral iron, so start parenteral iron",
+        "Patient has developed iron overload, start chelation therapy",
+        "Suspicious of a familial cancer syndrome, do PTEN mutation testing",
+        "Suspicious of familial cancer syndrome, do STK11 mutation testing"
+      ],
+      correctIndex: 3,
+      explanation:
+        "Occult blood positivity plus mucocutaneous pigmentation suggests Peutz–Jeghers syndrome. This is associated with STK11 (LKB1) mutation and increased risk of various malignancies, so evaluation for a familial cancer syndrome with STK11 testing is appropriate."
+    },
+    {
+      // Question 7 – Huntington disease
+      question:
+        "A 30-year-old male on treatment for depression presents to the psychiatrist with jerky involuntary movements. The antidepressant is changed, but after 1 month the jerky movements worsen and he has difficulty swallowing, so he is referred to a neurologist. Family history: his mother and paternal uncle had depression, later developed dementia and died at 45 and 46 years. A maternal cousin also had jerky movements, depression, and died at 38. Which of the following genetic mutations is most likely in this patient?",
+      options: [
+        "An amplification of CGG repeats",
+        "An amplification of APP gene on chromosome 21",
+        "An amplification of CAG repeats",
+        "A Robertsonian translocation between two chromosome 21s"
+      ],
+      correctIndex: 2,
+      explanation:
+        "Progressive chorea, psychiatric symptoms, and early-onset dementia with strong autosomal dominant family history are classic for Huntington disease, caused by CAG trinucleotide repeat expansion in the HTT gene on chromosome 4."
+    },
+    {
+      // Question 8 – concentric hypertrophy
+      question:
+        "A 24-year-old woman had Goodpasture syndrome which progressed to chronic renal failure. She is 165 cm tall and weighs 55 kg. Her blood pressure is persistently 150/90 to 180/110 mm Hg, and she is non-compliant with medications. Blood urea nitrogen is >100 mg/dL and she is on chronic dialysis. Chest X-ray shows an enlarged heart. The size of her heart is most likely due to which of the following processes involving the myocardial fibers?",
+      options: [
+        "Hyperplasia",
+        "Concentric hypertrophy",
+        "Eccentric hypertrophy",
+        "Lipofuscin deposition"
+      ],
+      correctIndex: 1,
+      explanation:
+        "Long-standing uncontrolled hypertension causes pressure overload, leading to concentric left ventricular hypertrophy (parallel addition of sarcomeres). Volume overload states produce eccentric hypertrophy instead. Cardiac myocytes hypertrophy; they do not undergo hyperplasia."
+    }
+    // Continue adding more questions here in the same format
+  ];
+
+  /***********************
+   * GRAND TEST LOGIC
+   ***********************/
+  let currentGrandIndex = 0;
+
+  if (startGrandBtn && grandSection) {
+    startGrandBtn.addEventListener('click', () => {
+      if (!grandTestQuestions || grandTestQuestions.length === 0) {
+        grandSection.textContent = "No questions added for this Grand Test yet.";
+        return;
+      }
+      currentGrandIndex = 0;
+      renderGrandQuestion();
+    });
+  }
+
+  function renderGrandQuestion() {
+    const qObj = grandTestQuestions[currentGrandIndex];
+    grandSection.innerHTML = '';
+
+    const qHeader = document.createElement('h3');
+    qHeader.textContent = `Question ${currentGrandIndex + 1} of ${grandTestQuestions.length}`;
+    grandSection.appendChild(qHeader);
+
+    const qText = document.createElement('p');
+    qText.textContent = qObj.question;
+    grandSection.appendChild(qText);
+
+    const ul = document.createElement('ul');
+
+    qObj.options.forEach((opt, idx) => {
+      const li = document.createElement('li');
+
+      const radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = 'grand-option';
+      radio.id = 'grand-option-' + idx;
+      radio.value = idx;
+
+      const label = document.createElement('label');
+      label.htmlFor = radio.id;
+      label.textContent = opt;
+      label.style.marginLeft = '8px';
+
+      li.appendChild(radio);
+      li.appendChild(label);
+      ul.appendChild(li);
+    });
+
+    grandSection.appendChild(ul);
+
+    const submitBtn = document.createElement('button');
+    submitBtn.textContent = "Submit Answer";
+    grandSection.appendChild(submitBtn);
+
+    const feedback = document.createElement('div');
+    feedback.className = 'feedback';
+    grandSection.appendChild(feedback);
+
+    const explanationDiv = document.createElement('div');
+    explanationDiv.className = 'explanation';
+    explanationDiv.style.display = 'none';
+    grandSection.appendChild(explanationDiv);
+
+    const nextBtn = document.createElement('button');
+    nextBtn.textContent = (currentGrandIndex === grandTestQuestions.length - 1)
+      ? "Finish"
+      : "Next Question";
+    nextBtn.disabled = true;
+    grandSection.appendChild(nextBtn);
+
+    submitBtn.addEventListener('click', () => {
+      const selected = grandSection.querySelector('input[name="grand-option"]:checked');
+      if (!selected) {
+        alert('Please select an option before submitting.');
+        return;
+      }
+      const chosen = parseInt(selected.value, 10);
+
+      if (chosen === qObj.correctIndex) {
+        feedback.textContent = "Correct!";
+        feedback.style.color = 'green';
+      } else {
+        feedback.textContent = "Wrong!";
+        feedback.style.color = 'red';
+      }
+
+      explanationDiv.style.display = 'block';
+      explanationDiv.innerHTML =
+        `<strong>Correct answer:</strong> ${qObj.options[qObj.correctIndex]}<br><br>` +
+        `<strong>Explanation:</strong> ${qObj.explanation}`;
+
+      nextBtn.disabled = false;
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentGrandIndex < grandTestQuestions.length - 1) {
+        currentGrandIndex++;
+        renderGrandQuestion();
+      } else {
+        grandSection.innerHTML = "<h3>Grand Test 1 completed!</h3>";
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
